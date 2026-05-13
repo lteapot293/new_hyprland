@@ -1,0 +1,294 @@
+@define-color background #282a36;
+@define-color background-darker #1e1f29;
+@define-color current-line #44475a;
+@define-color foreground #f8f8f2;
+@define-color comment #6272a4;
+@define-color cyan #8be9fd;
+@define-color green #50fa7b;
+@define-color orange #ffb86c;
+@define-color pink #ff79c6;
+@define-color purple #bd93f9;
+@define-color red #ff5555;
+@define-color yellow #f1fa8c;
+
+* {
+    border: none;
+    font-family: "JetBrainsMono Nerd Font", "Ubuntu Nerd Font", "Ubuntu", sans-serif;
+    font-size: 14px;
+    min-height: 0;
+}
+
+/* Основная панель - полупрозрачный фон */
+window#waybar {
+    background: rgba(36, 37, 53, 0.65);
+    color: @foreground;
+    border-radius: 16px;
+    margin: 4px 8px;
+}
+
+/* Контейнер панели */
+window#waybar > box {
+    background: transparent;
+    padding: 2px 4px;
+}
+
+/* ===== ЛЕВАЯ ЧАСТЬ - ФИОЛЕТОВЫЕ РАМКИ С ЭФФЕКТОМ СТЕКЛА ===== */
+#workspaces,
+#window {
+    background: linear-gradient(135deg, rgba(30, 31, 41, 0.8) 0%, rgba(68, 71, 90, 0.6) 100%);
+    border: 2px solid @purple;
+    border-radius: 14px;
+    padding: 0 12px;
+    margin: 2px 3px;
+    transition: all 0.3s ease;
+}
+
+#workspaces:hover,
+#window:hover {
+    border-color: @pink;
+    background: linear-gradient(135deg, rgba(68, 71, 90, 0.8) 0%, rgba(30, 31, 41, 0.6) 100%);
+}
+
+/* ===== ЧАСЫ - РОЗОВЫЕ РАМКИ С ЭФФЕКТОМ СТЕКЛА ===== */
+#clock {
+    background: linear-gradient(135deg, rgba(30, 31, 41, 0.8) 0%, rgba(68, 71, 90, 0.6) 100%);
+    border: 2px solid @pink;
+    border-radius: 14px;
+    padding: 0 16px;
+    margin: 2px 3px;
+    transition: all 0.3s ease;
+    color: @yellow;
+    font-weight: bold;
+}
+
+#clock:hover {
+    border-color: @purple;
+    background: linear-gradient(135deg, rgba(68, 71, 90, 0.8) 0%, rgba(30, 31, 41, 0.6) 100%);
+}
+
+/* ===== ПРАВАЯ ЧАСТЬ - БИРЮЗОВЫЕ РАМКИ С ЭФФЕКТОМ СТЕКЛА ===== */
+/* Трей */
+#tray {
+    background: linear-gradient(135deg, rgba(30, 31, 41, 0.8) 0%, rgba(68, 71, 90, 0.6) 100%);
+    border: 2px solid @cyan;
+    border-radius: 14px;
+    padding: 0 8px;
+    margin: 2px 3px;
+    transition: all 0.3s ease;
+}
+
+#tray:hover {
+    border-color: @green;
+    background: linear-gradient(135deg, rgba(68, 71, 90, 0.8) 0%, rgba(30, 31, 41, 0.6) 100%);
+}
+
+/* Группа hardware - общий контейнер */
+.modules-right > widget > box {
+    background: linear-gradient(135deg, rgba(30, 31, 41, 0.8) 0%, rgba(68, 71, 90, 0.6) 100%);
+    border: 2px solid @purple;
+    border-radius: 14px;
+    margin: 2px 3px;
+    padding: 0 2px;
+    transition: all 0.3s ease;
+}
+
+.modules-right > widget > box:hover {
+    border-color: @green;
+    background: linear-gradient(135deg, rgba(68, 71, 90, 0.8) 0%, rgba(30, 31, 41, 0.6) 100%);
+}
+
+/* ===== МОДУЛИ ВНУТРИ ГРУППЫ HARDWARE ===== */
+#backlight,
+#pulseaudio,
+#bluetooth,
+#custom-power,
+#battery {
+    background: transparent;
+    border: none;
+    margin: 0;
+    padding: 0 4px;  /* Уменьшено с 8px до 4px */
+    border-radius: 8px;  /* Добавим скругление для эффекта */
+    min-width: 24px;  /* Уменьшено с 30px до 24px */
+    min-height: 28px;
+    transition: all 0.2s ease;
+}
+
+/* Более широкие модули */
+
+#backlight {
+    color: @yellow;
+}
+
+#battery {
+    color: @green;
+}
+
+#pulseaudio {
+    color: @cyan;
+}
+
+/* ===== ОТДЕЛЬНЫЕ МОДУЛИ СПРАВА ===== */
+#custom-cliphist,
+#network,
+#custom-language,
+#custom-notification {
+    background: transparent;
+    border: none;
+    margin: 0;
+    padding: 0 8px;
+    border-radius: 0;
+    min-height: 28px;
+    transition: all 0.2s ease;
+}
+
+/* ===== ВЫДЕЛЕНИЕ ПРИ НАВЕДЕНИИ (ТОЛЬКО РАМКА) ===== */
+#backlight:hover,
+#pulseaudio:hover,
+#custom-power:hover,
+#bluetooth:hover,
+#battery:hover,
+#custom-cliphist:hover,
+#network:hover,
+#custom-language:hover,
+#custom-notification:hover {
+    background: linear-gradient(135deg, rgba(189, 147, 249, 0.3), rgba(255, 121, 198, 0.3));
+    border-radius: 12px;
+    border: 2px solid rgba(139, 233, 253, 0.4);
+}
+
+/* ===== ЦВЕТА МОДУЛЕЙ ===== */
+#custom-power {
+    color: @red;
+}
+
+#pulseaudio.muted {
+    color: @comment;
+}
+
+#bluetooth.off {
+    color: @comment;
+}
+
+#battery.charging {
+    color: @cyan;
+}
+
+#battery.warning:not(.charging) {
+    color: @orange;
+}
+
+#battery.critical:not(.charging) {
+    color: @red;
+}
+
+#custom-language {
+    font-weight: bold;
+    color: @pink;
+}
+
+#custom-cliphist {
+    color: @purple;
+    font-size: 16px;
+}
+
+#custom-notification {
+    color: @purple;
+    font-size: 16px;
+}
+
+#network {
+    color: @cyan;
+}
+
+#network.disconnected {
+    color: @red;
+}
+
+/* ===== WORKSPACES ===== */
+#workspaces {
+    padding: 2px 4px;
+}
+
+#workspaces button {
+    background: transparent;
+    border: none;
+    border-radius: 12px;
+    margin: 0 2px;
+    padding: 2px 8px;
+    min-width: 26px;
+    min-height: 22px;
+    font-size: 12px;
+    font-weight: bold;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    color: @comment;
+}
+
+#workspaces button.active {
+    background: linear-gradient(135deg, @purple, @pink);
+    color: @background;
+    box-shadow: 0 0 12px @purple;
+    font-size: 13px;
+}
+
+#workspaces button.empty {
+    opacity: 0.6;
+    color: @comment;
+}
+
+#workspaces button:not(.active):not(.empty) {
+    color: @cyan;
+    font-weight: 500;
+}
+
+#workspaces button.urgent {
+    background: linear-gradient(135deg, @red, @orange);
+    color: @background;
+    animation: urgent-blink 1s infinite;
+}
+
+#workspaces button:hover {
+    background: linear-gradient(135deg, @pink, @purple);
+    color: @background;
+}
+
+/* ===== WINDOW ===== */
+#window {
+    color: @cyan;
+    font-weight: bold;
+}
+
+#window.empty {
+    background: transparent;
+    border: none;
+}
+
+/* ===== TRAY SPECIAL ===== */
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+    background: @red;
+    border-radius: 12px;
+}
+
+/* ===== АНИМАЦИИ ===== */
+@keyframes urgent-blink {
+    0% { opacity: 1; }
+    50% { opacity: 0.7; }
+    100% { opacity: 1; }
+}
+
+/* ===== ТУЛТИПЫ ===== */
+tooltip {
+    background: @background-darker;
+    border: 2px solid @purple;
+    border-radius: 12px;
+    font-size: 13px;
+}
+
+tooltip label {
+    color: @foreground;
+    padding: 8px;
+}
